@@ -5,7 +5,6 @@ import { NotificationManager } from "react-notifications";
 
 import WarningModal from "./WarningModal";
 import SuccessModal from "./SuccessModal";
-import api from "../utils/api";
 
 import emailjs from "emailjs-com";
 const pay_method = [
