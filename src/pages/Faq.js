@@ -7,11 +7,7 @@ function Faq() {
   const [success, setSuccess] = useState(false)
   useEffect(()=> {
     async function fetchData() {
-      const res = await api.get('/faq');
-      console.log(res.data)
-      setSuccess(res.data.status)
-      setFaqs(res.data.faqs)
-      // handle the data
+      
     }
     fetchData();
   },[success])
