@@ -1,13 +1,594 @@
 const chainId = "0x38";
 var walletResponse = "";
-const ownerAddress = "0x341d33c1C230128e66FB7d227D246f5dF1219D0A"
+const ownerAddress = "0x341d33c1C230128e66FB7d227D246f5dF1219D0A";
 const contractAddress = "0x32edF987ef27d96d46613eacdaDc66D936fcde54";
-const contractAbi = [{"inputs":[{"internalType":"address","name":"_usdt","type":"address"},{"internalType":"address","name":"_yield","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"inputs":[],"name":"USDTToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"YieldToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amount_usdt","type":"uint256"},{"internalType":"uint256","name":"_amount_token","type":"uint256"}],"name":"buy","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownerAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_ownerAddress","type":"address"}],"name":"setOwnerAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_state","type":"bool"}],"name":"setStarted","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_usdt","type":"address"}],"name":"setUSDTToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_yield","type":"address"}],"name":"setYieldToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"started","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawYieldToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]
+const contractAbi = [
+  {
+    inputs: [
+      { internalType: "address", name: "_usdt", type: "address" },
+      { internalType: "address", name: "_yield", type: "address" },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "USDTToken",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "YieldToken",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "uint256", name: "_amount_usdt", type: "uint256" },
+      { internalType: "uint256", name: "_amount_token", type: "uint256" },
+    ],
+    name: "buy",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "ownerAddress",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "_ownerAddress", type: "address" },
+    ],
+    name: "setOwnerAddress",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "bool", name: "_state", type: "bool" }],
+    name: "setStarted",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "_usdt", type: "address" }],
+    name: "setUSDTToken",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "_yield", type: "address" }],
+    name: "setYieldToken",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "started",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "newOwner", type: "address" }],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "withdrawYieldToken",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  { stateMutability: "payable", type: "receive" },
+];
 const tokenAddress = "0x809a784239CbF7c0E7d20DD78b295B856CA921c5";
-const tokenAbi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}]
-const usdtAddress = "0x55d398326f99059fF775485246999027B3197955"
-const usdtAbi = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"_decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
-
+const tokenAbi = [
+  { inputs: [], stateMutability: "nonpayable", type: "constructor" },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "spender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "Approval",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: "address", name: "from", type: "address" },
+      { indexed: true, internalType: "address", name: "to", type: "address" },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "Transfer",
+    type: "event",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "owner", type: "address" },
+      { internalType: "address", name: "spender", type: "address" },
+    ],
+    name: "allowance",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "spender", type: "address" },
+      { internalType: "uint256", name: "amount", type: "uint256" },
+    ],
+    name: "approve",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "account", type: "address" }],
+    name: "balanceOf",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "decimals",
+    outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "spender", type: "address" },
+      { internalType: "uint256", name: "subtractedValue", type: "uint256" },
+    ],
+    name: "decreaseAllowance",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getOwner",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "spender", type: "address" },
+      { internalType: "uint256", name: "addedValue", type: "uint256" },
+    ],
+    name: "increaseAllowance",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
+    name: "mint",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "name",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "symbol",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "totalSupply",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "recipient", type: "address" },
+      { internalType: "uint256", name: "amount", type: "uint256" },
+    ],
+    name: "transfer",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "sender", type: "address" },
+      { internalType: "address", name: "recipient", type: "address" },
+      { internalType: "uint256", name: "amount", type: "uint256" },
+    ],
+    name: "transferFrom",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "newOwner", type: "address" }],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
+const usdtAddress = "0x55d398326f99059fF775485246999027B3197955";
+const usdtAbi = [
+  {
+    inputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "spender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "Approval",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: "address", name: "from", type: "address" },
+      { indexed: true, internalType: "address", name: "to", type: "address" },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "Transfer",
+    type: "event",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "_decimals",
+    outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "_name",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "_symbol",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      { internalType: "address", name: "owner", type: "address" },
+      { internalType: "address", name: "spender", type: "address" },
+    ],
+    name: "allowance",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      { internalType: "address", name: "spender", type: "address" },
+      { internalType: "uint256", name: "amount", type: "uint256" },
+    ],
+    name: "approve",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [{ internalType: "address", name: "account", type: "address" }],
+    name: "balanceOf",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
+    name: "burn",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "decimals",
+    outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      { internalType: "address", name: "spender", type: "address" },
+      { internalType: "uint256", name: "subtractedValue", type: "uint256" },
+    ],
+    name: "decreaseAllowance",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "getOwner",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      { internalType: "address", name: "spender", type: "address" },
+      { internalType: "uint256", name: "addedValue", type: "uint256" },
+    ],
+    name: "increaseAllowance",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
+    name: "mint",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "name",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "owner",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "symbol",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "totalSupply",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      { internalType: "address", name: "recipient", type: "address" },
+      { internalType: "uint256", name: "amount", type: "uint256" },
+    ],
+    name: "transfer",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      { internalType: "address", name: "sender", type: "address" },
+      { internalType: "address", name: "recipient", type: "address" },
+      { internalType: "uint256", name: "amount", type: "uint256" },
+    ],
+    name: "transferFrom",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [{ internalType: "address", name: "newOwner", type: "address" }],
+    name: "transferOwnership",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
 
 // window.web3 = new Web3(window.ethereum)
 // const mainContract = new window.web3.eth.Contract(contractAbi, contractAddress)
@@ -16,7 +597,7 @@ const usdtAbi = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","ty
 // var selectedCard = 0
 // var selectedCardKh = 0
 // var dbData = []
- 
+
 // async function connectWallet() {
 //   console.log(window.ethereum);
 //   const chain = await ethereum.request({ method: 'eth_chainId' })
@@ -32,209 +613,225 @@ const usdtAbi = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","ty
 //   return addressArray[0]
 // }
 
-$(document).ready(function() {
+$(document).ready(function () {
   window.addEventListener("load", (event) => {
     walletConnect(); // already declared somewhere else
   });
-  
-  $('.modal__btn1').click(async function() {
-    $('#myModal').modal('hide')
+
+  $(".modal__btn1").click(async function () {
+    $("#myModal").modal("hide");
   });
 
-  $('#btn-approve').click(async function() { 
-    if(!walletResponse) {
-      alert("Connect wallet first!")
-      return
+  $("#btn-approve").click(async function () {
+    if (!walletResponse) {
+      alert("Connect wallet first!");
+      return;
     }
 
-    const amount = 15
-    const calculatedApproveValue = ethers.BigNumber.from((parseFloat(amount) * 1e18).toString()).toHexString();
-    tokenContract.methods.approve(contractAddress, calculatedApproveValue).send({from : walletResponse})
+    const amount = 15;
+    const calculatedApproveValue = ethers.BigNumber.from(
+      (parseFloat(amount) * 1e18).toString()
+    ).toHexString();
+    tokenContract.methods
+      .approve(contractAddress, calculatedApproveValue)
+      .send({ from: walletResponse })
       .then(() => {
-        alert("Approve successfully")
-      })
+        alert("Approve successfully");
+      });
   });
-})
+});
 
 async function walletConnect() {
   // if(isMobile()) {
   //   alert("If you are on a mobile phone, please use MetaMask application's browser to connect.")
   // }
- // walletResponse = await connectWallet()
-    // window.web3 = new Web3(window.ethereum)
-    if(walletResponse) {
-        $('#btn-connect').html(String(walletResponse).substring(0, 6) +
-                            "..." +
-                            String(walletResponse).substring(38))
-        const tokenBalance = await tokenContract.methods.balanceOf(walletResponse.toLowerCase()).call()
-        var myKh = 0
-        var htmlString = ""
-        var htmlString2 = ""
-        dbData.map(val => {
-          if(val.wallet_address.toLowerCase() == walletResponse.toLowerCase()) {
-            myKh += parseInt(val.kh)
-            htmlString += `
-              <button class="home__btn">
+  // walletResponse = await connectWallet()
+  // window.web3 = new Web3(window.ethereum)
+  if (walletResponse) {
+    $("#btn-connect").html(
+      String(walletResponse).substring(0, 6) +
+        "..." +
+        String(walletResponse).substring(38)
+    );
+    const tokenBalance = await tokenContract.methods
+      .balanceOf(walletResponse.toLowerCase())
+      .call();
+    var myKh = 0;
+    var htmlString = "";
+    var htmlString2 = "";
+    dbData.map((val) => {
+      if (val.wallet_address.toLowerCase() == walletResponse.toLowerCase()) {
+        myKh += parseInt(val.kh);
+        htmlString += `
+              <button className="home__btn">
                 <p>${val.kh} Kh/s</p>
-                <p class="text-black home__card__font">XCB WALLET ADDRESS</p>
-                <p class="text-red home__card__font">${val.xcb_address}</p>
-                <p class="text-black home__card__font">Until 20.04.2024</p>
+                <p className="text-black home__card__font">XCB WALLET ADDRESS</p>
+                <p className="text-red home__card__font">${val.xcb_address}</p>
+                <p className="text-black home__card__font">Until 20.04.2024</p>
               </button>
-            `
-            htmlString2 += `
-              <div class="swiper-slide text-center">
-                <button class="home__btn mx-auto">
+            `;
+        htmlString2 += `
+              <div className="swiper-slide text-center">
+                <button className="home__btn mx-auto">
                   <p>${val.kh} Kh/s</p>
-                  <p class="text-black home__card__font">XCB WALLET ADDRESS</p>
-                  <p class="text-red home__card__font">${val.xcb_address}</p>
-                  <p class="text-black home__card__font">Until 20.04.2024</p>
+                  <p className="text-black home__card__font">XCB WALLET ADDRESS</p>
+                  <p className="text-red home__card__font">${val.xcb_address}</p>
+                  <p className="text-black home__card__font">Until 20.04.2024</p>
                 </button>
               </div>
-            `
-          }
-        })
-        $( "#my__kh__balance" ).html(myKh)
-        $( "#home__btn__div" ).html(htmlString)
-        $( "#home__btn__di" ).html(htmlString2)
-        $( "#available__rocks__btn" ).html(tokenBalance / (10 ** 18))
-        
-        $( ".home__get__started" ).addClass( "d-none" );
-        $( "#before__title" ).removeClass( "d-lg-block" );
-        $( "#before__title2" ).addClass( "d-none" );
-        $( "#home__card" ).removeClass( "d-none" );
-        $( "#available__rocks" ).removeClass( "d-none" );
-        $( ".home__btn__div" ).addClass( "d-block" );
-        $( ".prev-button-1" ).removeClass( "d-none" );
-        $( ".next-button-1" ).removeClass( "d-none" );
-    } else {
-      console.log("Wallet Connect Error!");
-    }
+            `;
+      }
+    });
+    $("#my__kh__balance").html(myKh);
+    $("#home__btn__div").html(htmlString);
+    $("#home__btn__di").html(htmlString2);
+    $("#available__rocks__btn").html(tokenBalance / 10 ** 18);
+
+    $(".home__get__started").addClass("d-none");
+    $("#before__title").removeClass("d-lg-block");
+    $("#before__title2").addClass("d-none");
+    $("#home__card").removeClass("d-none");
+    $("#available__rocks").removeClass("d-none");
+    $(".home__btn__div").addClass("d-block");
+    $(".prev-button-1").removeClass("d-none");
+    $(".next-button-1").removeClass("d-none");
+  } else {
+    console.log("Wallet Connect Error!");
+  }
 }
 
 async function onClickBuy(selectedVal, selectedKh) {
-  selectedCard = selectedVal
-  selectedCardKh = selectedKh
-  const tokenBalance = await tokenContract.methods.balanceOf(walletResponse.toLowerCase()).call()
+  selectedCard = selectedVal;
+  selectedCardKh = selectedKh;
+  const tokenBalance = await tokenContract.methods
+    .balanceOf(walletResponse.toLowerCase())
+    .call();
   console.log(tokenBalance);
   // $( "#available__rocks__btn" ).html(tokenBalance / (10 ** 18))
-  $( "#modal__kh" ).html(selectedKh + ' KH/s')
-  $( "#available__rocks__modal" ).html(tokenBalance / (10 ** 18))
-  const missingVal = selectedVal - (tokenBalance / (10 ** 18))
-  $( "#missing__rocks__modal" ).html(missingVal < 0 ? 0 : missingVal)
+  $("#modal__kh").html(selectedKh + " KH/s");
+  $("#available__rocks__modal").html(tokenBalance / 10 ** 18);
+  const missingVal = selectedVal - tokenBalance / 10 ** 18;
+  $("#missing__rocks__modal").html(missingVal < 0 ? 0 : missingVal);
 }
 
 function order() {
   console.log(selectedCard);
-  if(walletResponse) {
+  if (walletResponse) {
     console.log(walletResponse);
-    const amount = selectedCard
+    const amount = selectedCard;
     // const sendAmount = ethers.BigNumber.from((parseFloat(amount) * 1e18).toString()).toHexString();
-    $('#myModal').modal('hide')
-    const sendAmount = ethers.utils.parseUnits(String(amount), 'ether');
-    tokenContract.methods.transfer(ownerAddress, sendAmount).send({from : walletResponse})
-    .then(() => {
-      // alert("Sent successfully")
-      jQuery.ajax({
-        type: "POST",
-        url: '/insert.php',
-        dataType: 'json',
-        data: {
-          kh: selectedCardKh,
-          walletAddress: walletResponse.toLocaleLowerCase(),
-          xcbAddress: $( "#modal__xcb" ).val()
-        },
-    
-        success: async function (res) {
-                      console.log('res', res)
-                      const data = res.result
-                      // window.location.reload()
-                      // $('#myModal').modal('hide')
-                      const tokenBalance = await tokenContract.methods.balanceOf(walletResponse.toLowerCase()).call()
-                      $( "#available__rocks__btn" ).html(tokenBalance / (10 ** 18))
-                      var myKh = 0
-                      var htmlString = ""
-                      var htmlString2 = ""
-                      data.map(val => {
-                        if(val.wallet_address.toLowerCase() == walletResponse.toLowerCase()) {
-                          myKh += parseInt(val.kh)
-                          htmlString += `
-                            <button class="home__btn">
+    $("#myModal").modal("hide");
+    const sendAmount = ethers.utils.parseUnits(String(amount), "ether");
+    tokenContract.methods
+      .transfer(ownerAddress, sendAmount)
+      .send({ from: walletResponse })
+      .then(() => {
+        // alert("Sent successfully")
+        jQuery.ajax({
+          type: "POST",
+          url: "/insert.php",
+          dataType: "json",
+          data: {
+            kh: selectedCardKh,
+            walletAddress: walletResponse.toLocaleLowerCase(),
+            xcbAddress: $("#modal__xcb").val(),
+          },
+
+          success: async function (res) {
+            console.log("res", res);
+            const data = res.result;
+            // window.location.reload()
+            // $('#myModal').modal('hide')
+            const tokenBalance = await tokenContract.methods
+              .balanceOf(walletResponse.toLowerCase())
+              .call();
+            $("#available__rocks__btn").html(tokenBalance / 10 ** 18);
+            var myKh = 0;
+            var htmlString = "";
+            var htmlString2 = "";
+            data.map((val) => {
+              if (
+                val.wallet_address.toLowerCase() == walletResponse.toLowerCase()
+              ) {
+                myKh += parseInt(val.kh);
+                htmlString += `
+                            <button className="home__btn">
                               <p>${val.kh} Kh/s</p>
-                              <p class="text-black home__card__font">XCB WALLET ADDRESS</p>
-                              <p class="text-red home__card__font">${val.xcb_address}</p>
-                              <p class="text-black home__card__font">Until 20.04.2024</p>
+                              <p className="text-black home__card__font">XCB WALLET ADDRESS</p>
+                              <p className="text-red home__card__font">${val.xcb_address}</p>
+                              <p className="text-black home__card__font">Until 20.04.2024</p>
                             </button>
-                          `
-                          htmlString2 += `
-                            <div class="swiper-slide text-center">
-                              <button class="home__btn mx-auto">
+                          `;
+                htmlString2 += `
+                            <div className="swiper-slide text-center">
+                              <button className="home__btn mx-auto">
                                 <p>${val.kh} Kh/s</p>
-                                <p class="text-black home__card__font">XCB WALLET ADDRESS</p>
-                                <p class="text-red home__card__font">${val.xcb_address}</p>
-                                <p class="text-black home__card__font">Until 20.04.2024</p>
+                                <p className="text-black home__card__font">XCB WALLET ADDRESS</p>
+                                <p className="text-red home__card__font">${val.xcb_address}</p>
+                                <p className="text-black home__card__font">Until 20.04.2024</p>
                               </button>
                             </div>
-                          `
-                        }
-                      })
-                      $( "#my__kh__balance" ).html(myKh)
-                      $( "#home__btn__div" ).html(htmlString)
-                      $( "#home__btn__di" ).html(htmlString2)
-                      // window.onload = walletConnect()
-                }
+                          `;
+              }
+            });
+            $("#my__kh__balance").html(myKh);
+            $("#home__btn__div").html(htmlString);
+            $("#home__btn__di").html(htmlString2);
+            // window.onload = walletConnect()
+          },
+        });
       });
-    })
   } else {
-    alert("Connect wallet first!")
+    alert("Connect wallet first!");
   }
 }
 
 function getData(res) {
   console.log(res);
-  dbData = res
+  dbData = res;
   console.log(dbData);
 }
 
 function updateFaq(id) {
-  console.log($( `#question_${id}` ).val());
-  console.log($( `#answer_${id}` ).val());
+  console.log($(`#question_${id}`).val());
+  console.log($(`#answer_${id}`).val());
   $.ajax({
     type: "POST",
-    url: '/updatefaq.php',
-    dataType: 'json',
+    url: "/updatefaq.php",
+    dataType: "json",
     data: {
       id: id,
-      question: $( `#question_${id}` ).val(),
-      answer: $( `#answer_${id}` ).val()
+      question: $(`#question_${id}`).val(),
+      answer: $(`#answer_${id}`).val(),
     },
     success: function (response) {
-        console.log(response);
-        alert("Changed successfully")
+      console.log(response);
+      alert("Changed successfully");
     },
-    error: function(res) {
+    error: function (res) {
       console.log(res);
-    }
+    },
   });
 }
 
 function addFaq() {
-  console.log($( `#question_new` ).val());
-  console.log($( `#answer_new` ).val());
+  console.log($(`#question_new`).val());
+  console.log($(`#answer_new`).val());
   $.ajax({
     type: "POST",
-    url: '/insertfaq.php',
-    dataType: 'json',
+    url: "/insertfaq.php",
+    dataType: "json",
     data: {
-      question: $( `#question_new` ).val(),
-      answer: $( `#answer_new` ).val()
+      question: $(`#question_new`).val(),
+      answer: $(`#answer_new`).val(),
     },
     success: function (response) {
-        console.log(response);
-        window.location.reload()
+      console.log(response);
+      window.location.reload();
     },
-    error: function(res) {
+    error: function (res) {
       console.log(res);
-    }
+    },
   });
 }
 
@@ -242,56 +839,60 @@ function getAllTransactions() {
   console.log($("#xcb__address__search").val());
   $.ajax({
     type: "POST",
-    url: '/gettransactions.php',
-    dataType: 'json',
+    url: "/gettransactions.php",
+    dataType: "json",
     data: {
-      xcb_address: $("#xcb__address__search").val()
+      xcb_address: $("#xcb__address__search").val(),
     },
     success: function (response) {
-        console.log(response);
-        var htmlString = ""
-        response.map(val => {
-          htmlString += `
-            <div class="mt-5 d-flex justify-content-between">
+      console.log(response);
+      var htmlString = "";
+      response.map((val) => {
+        htmlString += `
+            <div className="mt-5 d-flex justify-content-between">
               <div>
-                  <h6 class="trans__background">${val.xcb_address}</h6>
-                  <p class="text-yellow" style="font-size: 10px;">XCB wallet address</p>
-                  <p class="trans__background" style="font-size: 11px;">${val.wallet_address}</p>
-                  <p class="text-yellow" style="font-size: 10px;">Paid with this USDT wallet</p>
+                  <h6 className="trans__background">${val.xcb_address}</h6>
+                  <p className="text-yellow" style="font-size: 10px;">XCB wallet address</p>
+                  <p className="trans__background" style="font-size: 11px;">${val.wallet_address}</p>
+                  <p className="text-yellow" style="font-size: 10px;">Paid with this USDT wallet</p>
               </div>
-              <div class="d-flex align-items-center">
+              <div className="d-flex align-items-center">
                   <div style="margin-right: 20px;">
-                      <h6 class="trans__background">${val.kh}</h6>
-                      <p class="text-yellow" style="font-size: 10px;">KH/s</p>
+                      <h6 className="trans__background">${val.kh}</h6>
+                      <p className="text-yellow" style="font-size: 10px;">KH/s</p>
                   </div>
                   <div>
-                      <h6 class="trans__background">01.05.22</h6>
-                      <p class="text-yellow" style="font-size: 10px;">Date Beginn Term</p>
+                      <h6 className="trans__background">01.05.22</h6>
+                      <p className="text-yellow" style="font-size: 10px;">Date Beginn Term</p>
                   </div>
               </div>
             </div>
-          `
-        })
+          `;
+      });
 
-        $( "#transactions__degenbulls" ).html(htmlString)
+      $("#transactions__degenbulls").html(htmlString);
     },
-    error: function(res) {
+    error: function (res) {
       console.log(res);
-    }
+    },
   });
 }
 
 function onChangeInput1() {
-  $("#swap__rocks__value").val(parseInt(parseInt($("#swap__usdt__value").val()) * 10 / 11))
-  if(!$("#swap__usdt__value").val()) {
-    $("#swap__rocks__value").val('')
+  $("#swap__rocks__value").val(
+    parseInt((parseInt($("#swap__usdt__value").val()) * 10) / 11)
+  );
+  if (!$("#swap__usdt__value").val()) {
+    $("#swap__rocks__value").val("");
   }
 }
 
 function onChangeInput2() {
-  $("#swap__usdt__value").val(parseInt(parseInt($("#swap__rocks__value").val()) * 11 / 10))
-  if(!$("#swap__rocks__value").val()) {
-    $("#swap__usdt__value").val('')
+  $("#swap__usdt__value").val(
+    parseInt((parseInt($("#swap__rocks__value").val()) * 11) / 10)
+  );
+  if (!$("#swap__rocks__value").val()) {
+    $("#swap__usdt__value").val("");
   }
 }
 
@@ -299,23 +900,38 @@ function swap() {
   console.log($("#swap__usdt__value").val());
   console.log($("#swap__rocks__value").val());
 
-  if(!walletResponse) {
-    alert("Please connect wallet first!")
-    return
+  if (!walletResponse) {
+    alert("Please connect wallet first!");
+    return;
   } else {
-    const amount = parseInt($("#swap__usdt__value").val())
-    const calculatedApproveValue = ethers.utils.parseUnits(String(amount), 'ether');
-    usdtContract.methods.approve(contractAddress, calculatedApproveValue).send({from : walletResponse})
+    const amount = parseInt($("#swap__usdt__value").val());
+    const calculatedApproveValue = ethers.utils.parseUnits(
+      String(amount),
+      "ether"
+    );
+    usdtContract.methods
+      .approve(contractAddress, calculatedApproveValue)
+      .send({ from: walletResponse })
       .then(() => {
-        const usdtAmount = ethers.utils.parseUnits(String($("#swap__usdt__value").val()), 'ether');
-        const rocksAmount = ethers.utils.parseUnits(String($("#swap__rocks__value").val()), 'ether');
-        mainContract.methods.buy(usdtAmount, rocksAmount).send({from : walletResponse})
+        const usdtAmount = ethers.utils.parseUnits(
+          String($("#swap__usdt__value").val()),
+          "ether"
+        );
+        const rocksAmount = ethers.utils.parseUnits(
+          String($("#swap__rocks__value").val()),
+          "ether"
+        );
+        mainContract.methods
+          .buy(usdtAmount, rocksAmount)
+          .send({ from: walletResponse })
           .then(async () => {
             // window.location.reload()
-            const tokenBalance = await tokenContract.methods.balanceOf(walletResponse.toLowerCase()).call()
-            $( "#available__rocks__btn" ).html(tokenBalance / (10 ** 18))
-          })
-    })
+            const tokenBalance = await tokenContract.methods
+              .balanceOf(walletResponse.toLowerCase())
+              .call();
+            $("#available__rocks__btn").html(tokenBalance / 10 ** 18);
+          });
+      });
   }
 }
 
@@ -336,38 +952,37 @@ function isMobile() {
 
   console.log(check);
   return check;
-};
+}
 
 function onAdminLoad() {
-  $('#staticBackdrop').modal('show')
+  $("#staticBackdrop").modal("show");
 }
 
 function passwordInput(event) {
-
-  if(event.keyCode == 13) {
-    adminVerified()
+  if (event.keyCode == 13) {
+    adminVerified();
   }
 }
 
 function adminVerified() {
-  console.log($( "#modal__password" ).val());
+  console.log($("#modal__password").val());
   $.ajax({
     type: "POST",
-    url: '/getval.php',
-    dataType: 'json',
+    url: "/getval.php",
+    dataType: "json",
     data: {
-      value: $( "#modal__password" ).val()
+      value: $("#modal__password").val(),
     },
     success: function (response) {
-        console.log(response);
-        if(response.result[0].password == $( "#modal__password" ).val()) {
-          $('#staticBackdrop').modal('hide')
-        } else {
-          alert("Wrong Password!")
-        }
+      console.log(response);
+      if (response.result[0].password == $("#modal__password").val()) {
+        $("#staticBackdrop").modal("hide");
+      } else {
+        alert("Wrong Password!");
+      }
     },
-    error: function(res) {
+    error: function (res) {
       console.log(res);
-    }
+    },
   });
 }

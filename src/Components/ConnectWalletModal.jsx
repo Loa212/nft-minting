@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { injected, walletconnect, coinbasewallet } from "../connectors";
-import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
+// import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 
 const ConnectWalletModal = ({}) => {
   const { account, activate, deactivate, error } = useWeb3React();
@@ -96,54 +96,54 @@ const ConnectWalletModal = ({}) => {
     closeButton.current.click();
   }
   return (
-    // <div class="modal" id="ConnectWalletModal">
-    //   <div class="modal-dialog modal-dialog-centered">
-    //     <div class="modal-content modal_class" style={{"background-color": "#1e1e1e", "background-size": "cover", "border-radius": "30px"}}>
+    // <div className="modal" id="ConnectWalletModal">
+    //   <div className="modal-dialog modal-dialog-centered">
+    //     <div className="modal-content modal_class" style={{"background-color": "#1e1e1e", "background-size": "cover", "border-radius": "30px"}}>
     //       <div className="row p-xl-3 mt-lg-5 mt-4 justify-content-center d-lg-block d-none">
-    //         <span class="container faq__title">
-    //           <div class="row p-xl-3 mt-lg-5 mt-4 justify-content-center d-lg-block d-none">
+    //         <span className="container faq__title">
+    //           <div className="row p-xl-3 mt-lg-5 mt-4 justify-content-center d-lg-block d-none">
     //             <div className=" col-12 d-flex gap-xxl-5 card__1__section gap-md-4 position-relative justify-content-center mx-1">
-    //               <div class="card__box card__black" id="card__1">
-    //                 <div class="card__img">
+    //               <div className="card__box card__black" id="card__1">
+    //                 <div className="card__img">
     //                   <img src="/assets/images/card1.png" alt="images" data-xblocker="passed" style={{"visibility": "visible"}}/>
     //                 </div>
-    //                 <div class="card__dtl">
-    //                   <div class="card__boxbolt">
+    //                 <div className="card__dtl">
+    //                   <div className="card__boxbolt">
     //                     <img src="/assets/images/bolt_yellow.png" alt="images"/>
-    //                     <p class="text-white mt-3">MetaMask</p>
+    //                     <p className="text-white mt-3">MetaMask</p>
     //                   </div>
-    //                   <h4 class="text-yellow"></h4>
-    //                   <button class="buy__btn1" onClick={onclickMetaMaskConnect} style={{"margin-top": "10px"}}>Connect</button>
+    //                   <h4 className="text-yellow"></h4>
+    //                   <button className="buy__btn1" onClick={onclickMetaMaskConnect} style={{"margin-top": "10px"}}>Connect</button>
     //                 </div>
     //               </div>
-    //               <div class="card__box card__black" id="card__1">
-    //                 <div class="card__img">
+    //               <div className="card__box card__black" id="card__1">
+    //                 <div className="card__img">
     //                   <img src="/assets/images/card1.png" alt="images" data-xblocker="passed" style={{"visibility": "visible"}}/>
     //                 </div>
-    //                 <div class="card__dtl">
-    //                   <div class="card__boxbolt">
+    //                 <div className="card__dtl">
+    //                   <div className="card__boxbolt">
     //                     <img src="/assets/images/bolt_yellow.png" alt="images"/>
-    //                     <p class="text-white mt-3">WalletConnect</p>
+    //                     <p className="text-white mt-3">WalletConnect</p>
     //                   </div>
-    //                   <h4 class="text-yellow"></h4>
-    //                   <button class="buy__btn1" onClick={onclickWalletconnect} style={{"margin-top": "10px"}}>Connect</button>
+    //                   <h4 className="text-yellow"></h4>
+    //                   <button className="buy__btn1" onClick={onclickWalletconnect} style={{"margin-top": "10px"}}>Connect</button>
     //                 </div>
     //               </div>
-    //               <div class="card__box card__black" id="card__1">
-    //                 <div class="card__img">
+    //               <div className="card__box card__black" id="card__1">
+    //                 <div className="card__img">
     //                   <img src="/assets/images/card1.png" alt="images" data-xblocker="passed" style={{"visibility": "visible"}}/>
     //                 </div>
-    //                 <div class="card__dtl">
-    //                   <div class="card__boxbolt">
+    //                 <div className="card__dtl">
+    //                   <div className="card__boxbolt">
     //                     <img src="/assets/images/bolt_yellow.png" alt="images"/>
-    //                     <p class="text-white mt-3">CoinBase</p>
+    //                     <p className="text-white mt-3">CoinBase</p>
     //                   </div>
-    //                   <h4 class="text-yellow"></h4>
-    //                   <button class="buy__btn1" onClick={onclickCoinBaseConnect} style={{"margin-top": "10px"}}>Connect</button>
+    //                   <h4 className="text-yellow"></h4>
+    //                   <button className="buy__btn1" onClick={onclickCoinBaseConnect} style={{"margin-top": "10px"}}>Connect</button>
     //                 </div>
     //               </div>
 
-    //               <button ref={closeButton} type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    //               <button ref={closeButton} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
     //             </div>
     //           </div>
@@ -152,20 +152,21 @@ const ConnectWalletModal = ({}) => {
     //     </div>
     //   </div>
     // </div>
-    <div class="modal" id="ConnectWalletModal">
-      <div class="modal-dialog modal-dialog-centered">
+    <div className="modal" id="ConnectWalletModal">
+      <div className="modal-dialog modal-dialog-centered">
         <div
-          class="modal-content modal_class"
+          className="modal-content modal_class"
           style={{
-            "background-color": "#1e1e1e",
-            "background-size": "cover",
-            "border-radius": "30px",
-          }}>
-          <span class="container faq__title">
-            <div class="row p-xl-3 mt-lg-5 mt-4 justify-content-center d-lg-block d-none">
-              <div class=" col-12 d-flex gap-xxl-5 card__1__section gap-md-4 position-relative justify-content-center mx-1">
-                <div class="card__box card__black" id="card__1">
-                  <div class="card__img">
+            backgroundColor: "#1e1e1e",
+            backgroundSize: "cover",
+            borderRadius: "30px",
+          }}
+        >
+          <span className="container faq__title">
+            <div className="row p-xl-3 mt-lg-5 mt-4 justify-content-center d-lg-block d-none">
+              <div className=" col-12 d-flex gap-xxl-5 card__1__section gap-md-4 position-relative justify-content-center mx-1">
+                <div className="card__box card__black" id="card__1">
+                  <div className="card__img">
                     <img
                       src="/assets/images/metamask.png"
                       alt="images"
@@ -173,21 +174,22 @@ const ConnectWalletModal = ({}) => {
                       style={{ visibility: "visible" }}
                     />
                   </div>
-                  <div class="card__dtl">
-                    <div class="card__boxbolt">
-                      <p class="text-white mt-3">MetaMask</p>
+                  <div className="card__dtl">
+                    <div className="card__boxbolt">
+                      <p className="text-white mt-3">MetaMask</p>
                     </div>
-                    <h4 class="text-yellow"></h4>
+                    <h4 className="text-yellow"></h4>
                     <button
-                      class="buy__btn1"
+                      className="buy__btn1"
                       onClick={onclickMetaMaskConnect}
-                      style={{ "margin-top": "10px" }}>
+                      style={{ marginTop: "10px" }}
+                    >
                       Connect
                     </button>
                   </div>
                 </div>
-                <div class="card__box card__black" id="card__1">
-                  <div class="card__img">
+                <div className="card__box card__black" id="card__1">
+                  <div className="card__img">
                     <img
                       src="/assets/images/walletconnect.png"
                       alt="images"
@@ -195,21 +197,22 @@ const ConnectWalletModal = ({}) => {
                       style={{ visibility: "visible" }}
                     />
                   </div>
-                  <div class="card__dtl">
-                    <div class="card__boxbolt">
-                      <p class="text-white mt-3">WalletConnect</p>
+                  <div className="card__dtl">
+                    <div className="card__boxbolt">
+                      <p className="text-white mt-3">WalletConnect</p>
                     </div>
-                    <h4 class="text-yellow"></h4>
+                    <h4 className="text-yellow"></h4>
                     <button
-                      class="buy__btn1"
+                      className="buy__btn1"
                       onClick={onclickWalletconnect}
-                      style={{ "margin-top": "10px" }}>
+                      style={{ marginTop: "10px" }}
+                    >
                       Connect
                     </button>
                   </div>
                 </div>
-                <div class="card__box card__black" id="card__1">
-                  <div class="card__img">
+                <div className="card__box card__black" id="card__1">
+                  <div className="card__img">
                     <img
                       src="/assets/images/coinbase.png"
                       alt="images"
@@ -217,15 +220,16 @@ const ConnectWalletModal = ({}) => {
                       style={{ visibility: "visible" }}
                     />
                   </div>
-                  <div class="card__dtl">
-                    <div class="card__boxbolt">
-                      <p class="text-white mt-3">CoinBase</p>
+                  <div className="card__dtl">
+                    <div className="card__boxbolt">
+                      <p className="text-white mt-3">CoinBase</p>
                     </div>
-                    <h4 class="text-yellow"></h4>
+                    <h4 className="text-yellow"></h4>
                     <button
-                      class="buy__btn1"
+                      className="buy__btn1"
                       onClick={onclickCoinBaseConnect}
-                      style={{ "margin-top": "10px" }}>
+                      style={{ marginTop: "10px" }}
+                    >
                       Connect
                     </button>
                   </div>
@@ -233,18 +237,19 @@ const ConnectWalletModal = ({}) => {
                 <button
                   ref={closeButton}
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"></button>
+                  aria-label="Close"
+                ></button>
               </div>
             </div>
-            <div class="row p-xl-3 mt-lg-5 mt-4 justify-content-center d-lg-none d-block">
-              <div class="swiper2 overflow-hidden col-12 d-flex gap-xxl-5 card__1__section gap-md-4 position-relative justify-content-center modal_bottom">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide qqq" style={{ display: "flex" }}>
-                    <div class=" col-12 d-flex gap-xxl-5 card__1__section gap-md-4 position-relative justify-content-center mx-1 small">
-                      <div class="card__box card__black" id="card__1">
-                        <div class="card__img">
+            <div className="row p-xl-3 mt-lg-5 mt-4 justify-content-center d-lg-none d-block">
+              <div className="swiper2 overflow-hidden col-12 d-flex gap-xxl-5 card__1__section gap-md-4 position-relative justify-content-center modal_bottom">
+                <div className="swiper-wrapper">
+                  <div className="swiper-slide qqq" style={{ display: "flex" }}>
+                    <div className=" col-12 d-flex gap-xxl-5 card__1__section gap-md-4 position-relative justify-content-center mx-1 small">
+                      <div className="card__box card__black" id="card__1">
+                        <div className="card__img">
                           <img
                             src="/assets/images/metamask.png"
                             alt="images"
@@ -252,25 +257,26 @@ const ConnectWalletModal = ({}) => {
                             style={{ visibility: "visible" }}
                           />
                         </div>
-                        <div class="card__dtl">
-                          <div class="card__boxbolt">
-                            <p class="text-white mt-3">MetaMask</p>
+                        <div className="card__dtl">
+                          <div className="card__boxbolt">
+                            <p className="text-white mt-3">MetaMask</p>
                           </div>
-                          <h4 class="text-yellow"></h4>
+                          <h4 className="text-yellow"></h4>
                           <button
-                            class="buy__btn1"
+                            className="buy__btn1"
                             onClick={onclickMetaMaskConnect}
-                            style={{ "margin-top": "10px" }}>
+                            style={{ marginTop: "10px" }}
+                          >
                             Connect
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="swiper-slide qqq" style={{ display: "flex" }}>
-                    <div class=" col-12 d-flex gap-xxl-5 card__1__section gap-md-4 position-relative justify-content-center mx-1 small small1">
-                      <div class="card__box card__black" id="card__1">
-                        <div class="card__img">
+                  <div className="swiper-slide qqq" style={{ display: "flex" }}>
+                    <div className=" col-12 d-flex gap-xxl-5 card__1__section gap-md-4 position-relative justify-content-center mx-1 small small1">
+                      <div className="card__box card__black" id="card__1">
+                        <div className="card__img">
                           <img
                             src="/assets/images/walletconnect.png"
                             alt="images"
@@ -278,25 +284,26 @@ const ConnectWalletModal = ({}) => {
                             style={{ visibility: "visible" }}
                           />
                         </div>
-                        <div class="card__dtl">
-                          <div class="card__boxbolt">
-                            <p class="text-white mt-3">WalletConnect</p>
+                        <div className="card__dtl">
+                          <div className="card__boxbolt">
+                            <p className="text-white mt-3">WalletConnect</p>
                           </div>
-                          <h4 class="text-yellow"></h4>
+                          <h4 className="text-yellow"></h4>
                           <button
-                            class="buy__btn1"
+                            className="buy__btn1"
                             onClick={onclickWalletconnect}
-                            style={{ "margin-top": "10px" }}>
+                            style={{ marginTop: "10px" }}
+                          >
                             Connect
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="swiper-slide qqq" style={{ display: "flex" }}>
-                    <div class=" col-12 d-flex gap-xxl-5 card__1__section gap-md-4 position-relative justify-content-center mx-1 small small1">
-                      <div class="card__box card__black" id="card__1">
-                        <div class="card__img">
+                  <div className="swiper-slide qqq" style={{ display: "flex" }}>
+                    <div className=" col-12 d-flex gap-xxl-5 card__1__section gap-md-4 position-relative justify-content-center mx-1 small small1">
+                      <div className="card__box card__black" id="card__1">
+                        <div className="card__img">
                           <img
                             src="/assets/images/coinbase.png"
                             alt="images"
@@ -304,15 +311,16 @@ const ConnectWalletModal = ({}) => {
                             style={{ visibility: "visible" }}
                           />
                         </div>
-                        <div class="card__dtl">
-                          <div class="card__boxbolt">
-                            <p class="text-white mt-3">CoinBase</p>
+                        <div className="card__dtl">
+                          <div className="card__boxbolt">
+                            <p className="text-white mt-3">CoinBase</p>
                           </div>
-                          <h4 class="text-yellow"></h4>
+                          <h4 className="text-yellow"></h4>
                           <button
-                            class="buy__btn1"
+                            className="buy__btn1"
                             onClick={onclickCoinBaseConnect}
-                            style={{ "margin-top": "10px" }}>
+                            style={{ marginTop: "10px" }}
+                          >
                             Connect
                           </button>
                         </div>
@@ -323,14 +331,15 @@ const ConnectWalletModal = ({}) => {
                 <button
                   ref={closeButton}
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"></button>
+                  aria-label="Close"
+                ></button>
               </div>
-              <div class="swiper-button-prev prev-button-1">
+              <div className="swiper-button-prev prev-button-1">
                 <img src="/assets/images/arrow-left.png" alt="image" />
               </div>
-              <div class="swiper-button-next next-button-1">
+              <div className="swiper-button-next next-button-1">
                 <img src="/assets/images/arrow-right.png" alt="image" />
               </div>
             </div>

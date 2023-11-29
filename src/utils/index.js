@@ -1,32 +1,32 @@
-import { BigNumber } from '@ethersproject/bignumber'
-import { getAddress } from '@ethersproject/address'
-import { Contract } from '@ethersproject/contracts'
-import { AddressZero } from '@ethersproject/constants'
-import { ethers } from 'ethers'
+// import { BigNumber } from '@ethersproject/bignumber'
+import { getAddress } from "@ethersproject/address";
+import { Contract } from "@ethersproject/contracts";
+import { AddressZero } from "@ethersproject/constants";
+import { ethers } from "ethers";
 // import { Fraction } from '../entities'
 
 export function isAddress(value) {
-    try {
-        return getAddress(value)
-    } catch {
-        return false
-    }
+  try {
+    return getAddress(value);
+  } catch {
+    return false;
+  }
 }
 
 export function getSigner(library, account) {
-    return library.getSigner(account).connectUnchecked()
+  return library.getSigner(account).connectUnchecked();
 }
 
 export function getProviderOrSigner(library, account) {
-    return account ? getSigner(library, account) : library
+  return account ? getSigner(library, account) : library;
 }
 
 export function getContract(address, ABI, library, account) {
-    if (!isAddress(address) || address === AddressZero) {
-        throw Error(`Invalid 'address' parameter '${address}'.`)
-    }
+  if (!isAddress(address) || address === AddressZero) {
+    throw Error(`Invalid 'address' parameter '${address}'.`);
+  }
 
-    return new Contract(address, ABI, getProviderOrSigner(library, account))
+  return new Contract(address, ABI, getProviderOrSigner(library, account));
 }
 
 // export const formatFromBalance = (value, decimals = 18) => {
@@ -49,41 +49,35 @@ export function getContract(address, ABI, library, account) {
 // }
 
 export const parseBalance = (value, decimals = 18) => {
-    return ethers.utils.parseUnits(value || '0', decimals)
-}
+  return ethers.utils.parseUnits(value || "0", decimals);
+};
 
 export const isEmptyValue = (text) =>
-    ethers.BigNumber.isBigNumber(text)
-        ? ethers.BigNumber.from(text).isZero()
-        : text === '' || text.replace(/0/g, '').replace(/\./, '') === ''
+  ethers.BigNumber.isBigNumber(text)
+    ? ethers.BigNumber.from(text).isZero()
+    : text === "" || text.replace(/0/g, "").replace(/\./, "") === "";
 
 export const errorFilter = (err) => {
-    let status =
-        'Transaction failed because you have insufficient funds or sales not started'
-    let status1 = 
-        'Sent incorrect ETH value'
+  let status =
+    "Transaction failed because you have insufficient funds or sales not started";
+  let status1 = "Sent incorrect ETH value";
 
-    if (JSON.stringify(err).indexOf('insufficient') > -1)
-        return status
-    if (JSON.stringify(err).indexOf(status1) > -1)
-        return status1
+  if (JSON.stringify(err).indexOf("insufficient") > -1) return status;
+  if (JSON.stringify(err).indexOf(status1) > -1) return status1;
 
-    if (err.message)
-        return err.message.substr(err.message.indexOf(':') + 1)
+  if (err.message) return err.message.substr(err.message.indexOf(":") + 1);
 
-    if (!err.error) 
-        return err
+  if (!err.error) return err;
 
-    let errorContainer =
-    err.error && err.error.message ? err.error.message : ''
-    let errorBody = errorContainer.substr(errorContainer.indexOf(':') + 1)
+  let errorContainer = err.error && err.error.message ? err.error.message : "";
+  let errorBody = errorContainer.substr(errorContainer.indexOf(":") + 1);
 
-    return errorBody
-}
+  return errorBody;
+};
 
 export const getEllipsisTxt = (str, n = 6) => {
-    if (str) {
-      return `${str.substr(0, n)}...${str.substr(str.length - n, str.length)}`;
-    }
-    return "";
+  if (str) {
+    return `${str.substr(0, n)}...${str.substr(str.length - n, str.length)}`;
+  }
+  return "";
 };
